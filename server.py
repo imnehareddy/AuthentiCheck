@@ -15,9 +15,9 @@ UPLOAD_DIR = os.path.join(DATA_DIR, 'uploads')
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)
-app.secret_key = 'your_secret_key_here'
+app.secret_key = 'supersecretkey'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
