@@ -1,0 +1,21 @@
+AUTHENTIC DOCUMENT - REFERENCE 3
+
+This is an authentic reference document used for similarity matching and plagiarism detection.
+
+Document Content:
+- Contains legitimate academic content
+- Serves as a baseline for document verification
+- Includes structured information and references
+
+Purpose: This document is stored as a reference to help identify copied or plagiarized content in submitted documents. The system will compare incoming documents against this baseline to detect similarities.
+
+Key characteristics:
+1. Unique writing style and tone
+2. Specific technical terminology
+3. Original research findings
+4. Properly cited sources
+
+Reference ID: REF-003
+Date Created: 2026-02-17
+Document Type: Academic Reference
+Status: Active

@@ -1,0 +1,89 @@
+AUTHENTIC DOCUMENT - REFERENCE 13
+
+Software Release Notes - Version 2.1.0
+
+AUTHENTICHECK VERSION 2.1.0 RELEASE NOTES
+
+Release Date: February 15, 2026
+Platform: Linux, Windows, macOS
+Build: 2.1.0-GA
+
+NEW FEATURES:
+
+1. Advanced Similarity Analysis
+   - Machine learning-based document comparison
+   - Semantic similarity detection (not just string matching)
+   - Configurable sensitivity thresholds
+   - Detailed difference highlighting
+
+2. Blockchain Integration (Beta)
+   - Immutable document hash storage on Ethereum
+   - Smart contract-based verification
+   - Permanent audit trail for compliance
+   - Optional feature, disabled by default
+
+3. Multi-Language Support
+   - 15 language support added
+   - Automatic language detection
+   - Cultural-specific authenticity rules
+   - RTL language support (Arabic, Hebrew)
+
+4. Enhanced Reporting
+   - Executive summary generation
+   - Compliance report templates
+   - Custom report builder
+   - Scheduled report automation
+   - Export to PDF, Excel, JSON formats
+
+5. API Enhancements
+   - Batch processing endpoints
+   - Webhook support for event notifications
+   - Rate limiting improvements
+   - Request timeout management
+
+IMPROVEMENTS:
+
+- Performance: 30% faster document processing
+- UI/UX: Redesigned dashboard with dark mode
+- Database: Query optimization reducing response time by 45%
+- Security: Enhanced encryption and key rotation
+- Documentation: 50+ new API documentation and examples
+
+BUG FIXES:
+
+- Fixed PDF parsing for files with embedded fonts
+- Corrected memory leak in document comparison engine
+- Resolved database connection pooling issues
+- Fixed timezone handling in reports
+
+KNOWN ISSUES:
+
+- Large files (>1GB) may timeout on slower connections
+- Safari browser shows alignment issues on mobile view
+- Some special characters in filenames may not display correctly
+
+DEPENDENCIES:
+
+Python: 3.8+
+Flask: 2.0+
+SQLite: 3.22+
+OpenSSL: 1.1.1+
+
+Migration Notes:
+- Database schema auto-migration on first run
+- Backup existing database before upgrade
+- API changes documented in migration guide
+
+Download:
+https://releases.authenticheck.example.com/v2.1.0/
+
+Installation:
+pip install authenticheck==2.1.0
+
+Support EOL Dates:
+v2.0.x: June 15, 2026
+v1.9.x: March 15, 2026
+
+Reference ID: REF-013
+Version: 2.1.0
+Build Date: 2026-02-15

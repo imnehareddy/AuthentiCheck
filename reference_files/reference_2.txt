@@ -1,0 +1,2 @@
+AuthentiCheck seeded reference example.
+This document is stored as a trusted reference for matching and comparison.

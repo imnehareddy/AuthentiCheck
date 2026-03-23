@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuthentiCheck - Document Authenticity Verification</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  
+  <nav style="display: flex; justify-content: space-between; align-items: center; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 2rem;">
+    <ul class="nav-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      <li class="logo" style="font-weight: bold; font-size: 1.2rem; color: #1e3a8a;"><i class="fas fa-certificate"></i> AuthentiCheck</li>
+      <li><a href="/" style="text-decoration: none; color: #4b5563;"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="/upload" style="text-decoration: none; color: #4b5563;"><i class="fas fa-upload"></i> Upload</a></li>
+      <li><a href="/history" style="text-decoration: none; color: #4b5563;"><i class="fas fa-history"></i> History</a></li>
+      <li><a href="/about" style="text-decoration: none; color: #4b5563;"><i class="fas fa-info-circle"></i> About</a></li>
+    </ul>
+    <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      {% if session.user %}
+        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
+      {% else %}
+        <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h1><i class="fas fa-shield-alt"></i> {% if session.user %}Welcome {{ session.user.name }}{% else %}Welcome Guest{% endif %}</h1>
+      
+      <p>Verify the authenticity of your documents with our advanced verification system. AuthentiCheck provides a secure and reliable way to validate document integrity and authenticity.</p>
+      <a href="{% if session.user %}/start-verifying{% else %}/login{% endif %}" id="get-started-btn" class="btn"><i class="fas fa-check"></i> Get Started</a>
+
+      <h2><i class="fas fa-cog"></i> Our Services</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-certificate"></i>
+          <h3>Document Verification</h3>
+          <p>Our platform uses cutting-edge technology to verify the authenticity of various document types including certificates, licenses, and official records.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-tachometer-alt"></i>
+          <h3>Quick Processing</h3>
+          <p>Get results in seconds with our optimized verification system. Advanced algorithms analyze your document rapidly without compromising accuracy.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-database"></i>
+          <h3>Secure Storage</h3>
+          <p>Your documents are processed securely and deleted after verification. We maintain the highest standards of data privacy and protection.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p><i class="fas fa-copyright"></i> 2026 AuthentiCheck. All rights reserved.</p>
+    <p><i class="fas fa-lock-open"></i> Secure Document Verification Platform</p>
+    <div class="footer-links">
+      <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+      <a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a>
+      <a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+
+</body>
+</html>

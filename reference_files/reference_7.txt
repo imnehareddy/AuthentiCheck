@@ -1,0 +1,41 @@
+AUTHENTIC DOCUMENT - REFERENCE 7
+
+Legal Document - Terms and Conditions
+
+TERMS AND CONDITIONS FOR DOCUMENT AUTHENTICATION SERVICE
+
+1. Scope and Definitions
+This agreement defines the terms under which AuthentiCheck provides document authentication and verification services. The service includes document upload, storage, verification, and reporting capabilities.
+
+2. Service Description
+- Document upload and storage: 100 GB per user
+- Reference document management: Up to 50 reference documents
+- Real-time verification: Instant authenticity checks
+- Report generation: Comprehensive similarity reports
+
+3. User Responsibilities
+- Users must maintain confidentiality of access credentials
+- Users are responsible for content of uploaded documents
+- Prohibited content: Illegal materials, malware, classified information
+- Users must comply with applicable data protection regulations
+
+4. Service Terms
+- Service availability: 99.9% uptime guarantee
+- Response time: <2 seconds for verification requests
+- Data retention: 30 days for non-reference documents
+- Compliance: GDPR, CCPA, and local regulations
+
+5. Liability and Disclaimers
+- AuthentiCheck is not liable for incorrect verification results
+- Users use the service "as-is" without warranties
+- Maximum liability limited to service fees paid
+
+6. Termination
+- Either party may terminate with 30 days notice
+- Upon termination, all user data will be deleted within 7 days
+- Outstanding fees remain due
+
+Effective Date: 2026-01-01
+Version: 1.5
+Last Amendment: 2026-02-14
+Reference ID: REF-007

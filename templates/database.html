@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database - AuthentiCheck</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  
+  <nav style="display: flex; justify-content: space-between; align-items: center; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 2rem;">
+    <ul class="nav-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      <li class="logo" style="font-weight: bold; font-size: 1.2rem; color: #1e3a8a;"><i class="fas fa-certificate"></i> AuthentiCheck</li>
+      <li><a href="/" style="text-decoration: none; color: #4b5563;"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="/upload" style="text-decoration: none; color: #4b5563;"><i class="fas fa-upload"></i> Upload</a></li>
+      <li><a href="/history" style="text-decoration: none; color: #4b5563;"><i class="fas fa-history"></i> History</a></li>
+      <li><a href="/about" style="text-decoration: none; color: #4b5563;"><i class="fas fa-info-circle"></i> About</a></li>
+    </ul>
+    <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      {% if session.user %}
+        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
+      {% else %}
+        <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h1><i class="fas fa-database"></i> Document Database</h1>
+      <p>View and manage all uploaded and reference documents stored in the AuthentiCheck database.</p>
+
+      <div class="result-section" style="margin-top: 2rem;">
+        <h2><i class="fas fa-folder-open"></i> Stored Documents</h2>
+        
+        <!-- Stored documents: list and seed controls -->
+        <div style="margin-top:1.5rem; border-radius:8px; background:#f8fafc; padding:1.5rem;">
+          <div style="display:flex; gap:0.6rem; align-items:center; justify-content:flex-end; margin-bottom:1rem; flex-wrap:wrap;">
+            <input id="storedDocsSearch" type="search" placeholder="Search stored documents..." style="flex:1; min-width:200px; padding:0.5rem; border-radius:6px; border:1px solid #e6edf3;">
+            <button type="button" class="btn btn-primary" onclick="searchStoredDocs()"><i class="fas fa-search"></i> Search</button>
+            <button type="button" class="btn btn-primary" onclick="fetchStoredDocuments()"><i class="fas fa-sync"></i> Refresh</button>
+            <button type="button" class="btn btn-secondary" onclick="seedReferencesFrontend()"><i class="fas fa-seedling"></i> Seed References</button>
+          </div>
+          <div id="storedDocsList" style="min-height:200px; color:#334155; overflow-x:auto;">
+            <p style="margin:0; color:#64748b;"><i class="fas fa-info-circle"></i> Click <strong>Refresh</strong> to load documents from the database.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem; padding:1.5rem; background:#f0f9ff; border-radius:8px; border-left:4px solid #3b82f6;">
+        <h3><i class="fas fa-lightbulb"></i> How to Use</h3>
+        <ul style="margin-left:1.5rem; color:#334155;">
+          <li><strong>Refresh</strong> – Load all documents from the database</li>
+          <li><strong>Seed References</strong> – Add reference documents for comparison</li>
+          <li><strong>Search</strong> – Filter documents by filename, SHA-256 hash, or upload date</li>
+          <li><strong>File Links</strong> – Click on any filename to download the document</li>
+        </ul>
+      </div>
+
+      <div style="text-align:center; margin-top:2rem;">
+        <a href="/upload" class="btn btn-primary"><i class="fas fa-upload"></i> Upload New Document</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p><i class="fas fa-copyright"></i> 2026 AuthentiCheck. All rights reserved.</p>
+    <p><i class="fas fa-lock-open"></i> Secure Document Verification Platform</p>
+    <div class="footer-links">
+      <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+      <a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a>
+      <a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Initialize database page when loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = window.location.pathname.split('/').pop() || '/';
+      const navLinks = document.querySelectorAll('nav a');
+      
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Initialize stored docs features for this page
+      try { initStoredDocsFeatures(); } catch (e) { console.error('initStoredDocsFeatures error:', e); }
+    });
+  </script>
+</body>
+</html>

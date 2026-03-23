@@ -1,0 +1,31 @@
+AUTHENTIC DOCUMENT - REFERENCE 6
+
+Research Paper Abstract
+
+Title: Advances in Document Authenticity Verification using Cryptographic Hashing
+
+Abstract:
+This paper presents a novel approach to document authenticity verification using advanced cryptographic techniques. The proposed system utilizes SHA-256 hashing algorithms to create unique digital fingerprints for documents, enabling precise identification of original and duplicate documents within large databases.
+
+Key Contributions:
+1. A scalable framework for document verification applicable to various industries
+2. Comparison of multiple hashing algorithms for optimal performance
+3. Real-time similarity detection using hash-based comparison
+4. Integration with cloud storage systems
+
+Methodology:
+The research involved analyzing 10,000 documents across multiple categories. We implemented a Python-based system that processes documents, extracts metadata, and generates cryptographic hashes. The system achieved 99.7% accuracy in detecting duplicate documents and 98.5% accuracy in identifying modified documents.
+
+Results:
+- Processing speed: 1000 documents/hour
+- Storage efficiency: 40% reduction compared to traditional methods
+- Detection accuracy: >98% for all tested scenarios
+- Scalability: Linear performance growth with database size
+
+Conclusions:
+The proposed authenticity verification system provides a robust solution for document management across enterprises. Future work will focus on extending the system to handle multimedia content and implementing blockchain integration.
+
+Keywords: Authentication, Cryptography, Document Management, Hashing
+Reference ID: REF-006
+Pages: 12
+Citation: IEEE 2026

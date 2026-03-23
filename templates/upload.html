@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload - AuthentiCheck</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+  <nav style="display: flex; justify-content: space-between; align-items: center; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 2rem;">
+    <ul class="nav-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      <li class="logo" style="font-weight: bold; font-size: 1.2rem; color: #1e3a8a;"><i class="fas fa-certificate"></i> AuthentiCheck</li>
+      <li><a href="/" style="text-decoration: none; color: #4b5563;"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="/upload" style="text-decoration: none; color: #4b5563;"><i class="fas fa-upload"></i> Upload</a></li>
+      <li><a href="/history" style="text-decoration: none; color: #4b5563;"><i class="fas fa-history"></i> History</a></li>
+      <li><a href="/about" style="text-decoration: none; color: #4b5563;"><i class="fas fa-info-circle"></i> About</a></li>
+    </ul>
+    <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      {% if session.user %}
+        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
+      {% else %}
+        <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+<!-- MAIN -->
+<main>
+  <div class="container">
+
+    <h1><i class="fas fa-upload"></i> Upload Document</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+      <div class="upload-box">
+        <input type="file" name="file" required>
+      </div>
+
+      <button type="submit" class="btn btn-success"  style="padding: 15px 30px; font-size: 1.1rem; border-radius: 8px;">
+        <i class="fas fa-upload"></i> Upload
+      </button>
+
+    </form>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p><i class="fas fa-copyright"></i> 2026 AuthentiCheck</p>
+</footer>
+
+<!-- JS -->
+<script src="/js/script.js"></script>
+
+</body>
+</html>

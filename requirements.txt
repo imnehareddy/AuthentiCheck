@@ -1,0 +1,8 @@
+Werkzeug==2.3.0
+Flask>=2.0
+flask-cors>=3.0
+Flask-Login>=0.6
+Flask-SQLAlchemy>=2.5
+Flask-OAuthlib>=0.9
+oauthlib>=3.2
+requests>=2.25

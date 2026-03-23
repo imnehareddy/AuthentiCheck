@@ -1,0 +1,11 @@
+# Educational Reference Data Example
+
+# This is a sample educational reference file for seeding into the database.
+# You can add more files like this in the reference_files/ directory.
+
+Title: Bachelor of Science in Computer Science
+Institution: Example University
+Year: 2022
+Degree ID: EDU-2022-001
+
+Description: This document certifies that the holder has completed the requirements for the Bachelor of Science in Computer Science at Example University in 2022.

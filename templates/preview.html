@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Results Preview</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .module-list {
+        list-style: none; padding: 0; max-width: 500px; margin: 0 auto;
+    }
+    .module-list li {
+        text-align: left;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        background: #f8fafc;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav style="display: flex; justify-content: space-between; align-items: center; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 2rem;">
+    <ul class="nav-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      <li class="logo" style="font-weight: bold; font-size: 1.2rem; color: #1e3a8a;"><i class="fas fa-certificate"></i> AuthentiCheck</li>
+      <li><a href="/" style="text-decoration: none; color: #4b5563;"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="/upload" style="text-decoration: none; color: #4b5563;"><i class="fas fa-upload"></i> Upload</a></li>
+      <li><a href="/history" style="text-decoration: none; color: #4b5563;"><i class="fas fa-history"></i> History</a></li>
+      <li><a href="/about" style="text-decoration: none; color: #4b5563;"><i class="fas fa-info-circle"></i> About</a></li>
+    </ul>
+    <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      {% if session.user %}
+        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
+      {% else %}
+        <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <main>
+    <div class="container text-center" style="margin-top: 50px; text-align: center;">
+      <h2 style="color: #1e3a8a;"><i class="fas fa-check-circle" style="color: #10b981;"></i> Analysis Complete</h2>
+      <h3>Document: {{ report.filename }}</h3>
+      
+      <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin: 2rem auto; max-width: 700px;">
+          <p style="font-size: 1.2rem;">Overall Status: <strong style="color: {{ report.color }};">{{ report.final_status }}</strong></p>
+          <div style="margin: 1rem 0;">
+             <div class="percentage-bar" style="max-width: 300px; margin: 0 auto; height: 18px;">
+                 <div class="percentage-fill" style="width: {{ report.final_score }}%; background: #3b82f6;"></div>
+             </div>
+             <p style="margin-top: 0.5rem; font-weight: bold; color: #4b5563;">Overall Confidence: {{ report.final_score }}%</p>
+          </div>
+          
+          <h4 style="margin-top: 2rem; margin-bottom: 1rem;"><i class="fas fa-chart-bar"></i> Quick Insight</h4>
+          <ul class="module-list">
+            {% for mod, data in report.modules.items() %}
+            <li>
+              <span>{{ mod }}</span>
+              <span>
+                  <strong>{{ data.score }}%</strong> 
+                  <span style="font-size: 0.8rem; padding: 0.2rem 0.5rem; border-radius: 10px; background: {% if data.score >= 70 %}#d1fae5{% elif data.score >= 50 %}#fef3c7{% else %}#fee2e2{% endif %}; color: {% if data.score >= 70 %}#065f46{% elif data.score >= 50 %}#92400e{% else %}#991b1b{% endif %}; margin-left: 0.5rem;">
+                      {{ data.status }}
+                  </span>
+              </span>
+            </li>
+            {% endfor %}
+          </ul>
+          
+          <div style="margin-top: 30px;">
+            <a href="/report/{{ doc_id }}" class="btn btn-primary" style="font-size: 1.1rem; padding: 0.8rem 2rem;"><i class="fas fa-file-alt"></i> View Full Detailed Report</a>
+          </div>
+      </div>
+    </div>
+  </main>
+  
+  <script src="/js/script.js"></script>
+</body>
+</html>

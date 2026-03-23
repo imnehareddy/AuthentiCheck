@@ -1,0 +1,37 @@
+AUTHENTIC DOCUMENT - REFERENCE 5
+
+Technical Specification Document
+
+System Architecture for Authentication System
+
+Overview:
+This document describes the technical specifications for the AuthentiCheck document authentication system. It provides detailed information about the system components, their interactions, and implementation details.
+
+System Components:
+1. File Upload Module - Handles document ingestion and storage
+2. Hash Generation Engine - Computes SHA-256 signatures
+3. Metadata Extractor - Retrieves document properties
+4. Database Layer - Stores document records with sqlite3
+5. API Server - Provides REST endpoints for client operations
+6. Similarity Engine - Compares documents against reference set
+
+Database Schema:
+- documents table: stores filename, path, MIME type, size, SHA-256 hash, upload timestamp
+- references table: maintains reference document set
+- audit_log table: tracks all operations
+
+API Endpoints:
+- POST /api/upload - Upload new document
+- GET /api/documents - List all documents
+- POST /api/reference/seed - Load reference documents
+- GET /uploads/<filename> - Retrieve stored document
+
+Implementation Stack:
+- Backend: Python Flask framework
+- Database: SQLite3
+- Frontend: HTML5, CSS3, JavaScript
+- Protocol: REST with JSON
+
+Reference ID: REF-005
+Version: 1.0
+Date: 2026-02-15

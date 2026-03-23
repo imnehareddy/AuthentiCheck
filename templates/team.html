@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team - AuthentiCheck</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  
+  <nav style="display: flex; justify-content: space-between; align-items: center; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 2rem;">
+    <ul class="nav-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      <li class="logo" style="font-weight: bold; font-size: 1.2rem; color: #1e3a8a;"><i class="fas fa-certificate"></i> AuthentiCheck</li>
+      <li><a href="/" style="text-decoration: none; color: #4b5563;"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="/upload" style="text-decoration: none; color: #4b5563;"><i class="fas fa-upload"></i> Upload</a></li>
+      <li><a href="/history" style="text-decoration: none; color: #4b5563;"><i class="fas fa-history"></i> History</a></li>
+      <li><a href="/about" style="text-decoration: none; color: #4b5563;"><i class="fas fa-info-circle"></i> About</a></li>
+    </ul>
+    <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      {% if session.user %}
+        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
+      {% else %}
+        <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h1><i class="fas fa-users"></i> Meet Our Team</h1>
+      <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">AuthentiCheck is developed by a dedicated team of professionals passionate about document authenticity and cybersecurity.</p>
+
+      <!-- Team Members Grid -->
+      <div class="team-grid">
+        <div class="team-member">
+          <i class="fas fa-user-tie"></i>
+          <h3>Dr. Rajesh Kumar</h3>
+          <p class="role"><i class="fas fa-chess-king"></i> Project Lead</p>
+          <p style="margin-bottom: 0.3rem;"><strong>Cryptography Expert</strong></p>
+          <p>Dr. Rajesh Kumar leads the AuthentiCheck project with over 15 years of experience in cryptographic systems and digital security. He holds a PhD in Computer Science and has published numerous papers on document authentication.</p>
+        </div>
+
+        <div class="team-member">
+          <i class="fas fa-laptop-code"></i>
+          <h3>Priya Sharma</h3>
+          <p class="role"><i class="fas fa-code"></i> Lead Developer</p>
+          <p style="margin-bottom: 0.3rem;"><strong>Full Stack Engineer</strong></p>
+          <p>Priya is a full-stack developer with expertise in web applications and database systems. She has designed and implemented the core verification engine using modern web technologies and scalable architecture.</p>
+        </div>
+
+        <div class="team-member">
+          <i class="fas fa-brain"></i>
+          <h3>Aditya Patel</h3>
+          <p class="role"><i class="fas fa-robot"></i> ML Specialist</p>
+          <p style="margin-bottom: 0.3rem;"><strong>AI & Pattern Recognition</strong></p>
+          <p>Aditya brings advanced machine learning capabilities to AuthentiCheck. With a background in AI and pattern recognition, he developed the forgery detection algorithms that power our intelligent analysis.</p>
+        </div>
+
+        <div class="team-member">
+          <i class="fas fa-palette"></i>
+          <h3>Neha Gupta</h3>
+          <p class="role"><i class="fas fa-pencil-ruler"></i> UI/UX Designer</p>
+          <p style="margin-bottom: 0.3rem;"><strong>User Experience Design</strong></p>
+          <p>Neha designed the intuitive and user-friendly interface of AuthentiCheck. Her expertise in user experience design ensures that complex verification processes are presented in a clear and accessible manner.</p>
+        </div>
+
+        <div class="team-member">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Vikram Singh</h3>
+          <p class="role"><i class="fas fa-lock"></i> Security Officer</p>
+          <p style="margin-bottom: 0.3rem;"><strong>Compliance & Data Protection</strong></p>
+          <p>Vikram ensures that AuthentiCheck meets all security standards and compliance requirements. He manages data protection, GDPR compliance, and regular security audits to keep the platform secure.</p>
+        </div>
+
+        <div class="team-member">
+          <i class="fas fa-flask"></i>
+          <h3>Ananya Nair</h3>
+          <p class="role"><i class="fas fa-check-circle"></i> QA Lead</p>
+          <p style="margin-bottom: 0.3rem;"><strong>Quality Assurance</strong></p>
+          <p>Ananya oversees all testing and quality assurance processes. Her meticulous approach ensures that AuthentiCheck delivers accurate and reliable verification results every time.</p>
+        </div>
+      </div>
+
+      <!-- Team Values Section -->
+      <div class="details-section" style="margin-top: 3rem;">
+        <h2><i class="fas fa-heart"></i> Our Team Values</h2>
+        <ul style="margin-left: 1.5rem;">
+          <li><strong><i class="fas fa-handshake" style="color: #3b82f6;"></i> Integrity:</strong> We are committed to providing accurate, honest, and reliable document verification services.</li>
+          <li><strong><i class="fas fa-lightbulb" style="color: #3b82f6;"></i> Innovation:</strong> We continuously improve our technology and methods to stay ahead of emerging threats and trends.</li>
+          <li><strong><i class="fas fa-lock" style="color: #3b82f6;"></i> Security:</strong> Protecting user data and document privacy is our top priority.</li>
+          <li><strong><i class="fas fa-star" style="color: #3b82f6;"></i> Excellence:</strong> We strive for the highest standards in everything we do, from code quality to customer service.</li>
+          <li><strong><i class="fas fa-users" style="color: #3b82f6;"></i> Collaboration:</strong> We believe in teamwork and knowledge sharing to achieve better results.</li>
+          <li><strong><i class="fas fa-comments" style="color: #3b82f6;"></i> Transparency:</strong> We communicate openly about our capabilities, limitations, and any issues that arise.</li>
+        </ul>
+      </div>
+
+      <!-- Expertise Section -->
+      <div class="details-section">
+        <h2><i class="fas fa-award"></i> Our Expertise</h2>
+        <ul style="margin-left: 1.5rem;">
+          <li><strong><i class="fas fa-key" style="color: #3b82f6;"></i> Cryptographic Verification:</strong> Advanced algorithms for digital signature validation and hash-based integrity checks.</li>
+          <li><strong><i class="fas fa-database" style="color: #3b82f6;"></i> Metadata Analysis:</strong> Comprehensive examination of document metadata including creation date, modifications, and authorship information.</li>
+          <li><strong><i class="fas fa-brain" style="color: #3b82f6;"></i> Machine Learning:</strong> AI-powered forgery detection and pattern recognition for identifying suspicious documents.</li>
+          <li><strong><i class="fas fa-code" style="color: #3b82f6;"></i> Web Development:</strong> Modern, scalable web application architecture built with the latest technologies.</li>
+          <li><strong><i class="fas fa-shield" style="color: #3b82f6;"></i> Cybersecurity:</strong> Enterprise-grade security measures including encryption, secure data handling, and compliance.</li>
+          <li><strong><i class="fas fa-smile" style="color: #3b82f6;"></i> User Experience:</strong> Intuitive interface design making complex verification processes accessible to all users.</li>
+        </ul>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="details-section">
+        <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
+        <p>Have questions about our team or want to collaborate? We'd love to hear from you!</p>
+        <p><strong><i class="fas fa-at"></i> Email:</strong> <a href="mailto:team@authenticcheck.com" style="color: #3b82f6; text-decoration: none; font-weight: 500;">team@authenticcheck.com</a></p>
+        <p><strong><i class="fas fa-phone"></i> Phone:</strong> +1 (555) 123-4567</p>
+        <p><strong><i class="fas fa-map-marker-alt"></i> Office Address:</strong> 123 Tech Street, Innovation City, IC 12345</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 AuthentiCheck. All rights reserved.</p>
+    <p>Secure Document Verification Platform</p>
+    <div class="footer-links">
+      <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+      <a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a>
+      <a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

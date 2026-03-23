@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - AuthentiCheck</title>
+
+  <!-- ✅ Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- ✅ Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ✅ Your CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+  
+  <style>
+    /* Add extra styles for the about sections while keeping the overall theme intact */
+    .about-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border-left: 5px solid #3b82f6;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .about-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    .about-section h2 {
+      color: #1e3a8a;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0.75rem;
+    }
+    .about-text {
+      color: #4b5563;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    .feature-list, .workflow-list, .advantage-list, .future-list {
+      list-style: none;
+      padding-left: 0;
+      color: #4b5563;
+      margin-top: 1rem;
+    }
+    .feature-list li, .workflow-list li, .advantage-list li, .future-list li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      line-height: 1.6;
+    }
+    .feature-list i { color: #10b981; margin-top: 0.3rem; }
+    .workflow-list i { color: #f59e0b; margin-top: 0.3rem; }
+    .advantage-list i { color: #8b5cf6; margin-top: 0.3rem; }
+    .future-list i { color: #ec4899; margin-top: 0.3rem; }
+    
+    .tech-card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .tech-card {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+    .tech-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .tech-card h3 {
+      color: #1e3a8a;
+      margin-bottom: 0.5rem;
+    }
+    .tech-card p {
+      color: #64748b;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <nav style="display: flex; justify-content: space-between; align-items: center; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 2rem;">
+    <ul class="nav-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      <li class="logo" style="font-weight: bold; font-size: 1.2rem; color: #1e3a8a;"><i class="fas fa-certificate"></i> AuthentiCheck</li>
+      <li><a href="/" style="text-decoration: none; color: #4b5563;"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="/upload" style="text-decoration: none; color: #4b5563;"><i class="fas fa-upload"></i> Upload</a></li>
+      <li><a href="/history" style="text-decoration: none; color: #4b5563;"><i class="fas fa-history"></i> History</a></li>
+      <li><a href="/about" style="text-decoration: none; color: #4b5563;"><i class="fas fa-info-circle"></i> About</a></li>
+    </ul>
+    <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
+      {% if session.user %}
+        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
+      {% else %}
+        <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <main style="padding: 3rem 1rem; background: #f1f5f9; min-height: calc(100vh - 140px);">
+    <div class="container" style="max-width: 900px; margin: 0 auto;">
+      
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h1 style="color: #1e3a8a; font-size: 2.5rem; margin-bottom: 1rem;"><i class="fas fa-info-circle"></i> About AuthentiCheck</h1>
+        <p style="color: #64748b; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">An enterprise-grade, AI-driven digital platform designed to secure document authenticity.</p>
+      </div>
+
+      <!-- 1. Project Overview -->
+      <section class="about-section">
+        <h2><i class="fas fa-globe"></i> 1. Project Overview</h2>
+        <p class="about-text">
+          <strong>AuthentiCheck</strong> is an advanced, automated document authenticity verification system. Designed for high-stakes environments such as academic institutions, legal offices, and enterprise HR departments, it critically analyzes files to guarantee they are original and unmodified. By identifying forgery, tracing authorship, and verifying metadata, AuthentiCheck acts as a frontline defense against document fraud and plagiarism.
+        </p>
+      </section>
+
+      <!-- 2. Problem Statement -->
+      <section class="about-section" style="border-left-color: #ef4444;">
+        <h2><i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i> 2. Problem Statement</h2>
+        <p class="about-text">Traditional document verification workflow systems suffer from several critical vulnerabilities:</p>
+        <ul class="feature-list">
+          <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> <strong>Manual Verification:</strong> Requires human review, which is highly prone to subjective error and inconsistency.</li>
+          <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> <strong>Time-Consuming Processes:</strong> Large batches of documents take days or weeks for organizations to manually authenticate.</li>
+          <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> <strong>High Fraud Risk:</strong> Standard visual checks cannot detect sophisticated digital tampering, metadata spoofing, or deep paraphrasing.</li>
+          <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> <strong>Lack of Automation:</strong> Integrating robust checks into modern digital ingestion workflows is virtually impossible with legacy, offline tools.</li>
+        </ul>
+      </section>
+
+      <!-- 3. Proposed Solution -->
+      <section class="about-section" style="border-left-color: #10b981;">
+        <h2><i class="fas fa-check-double" style="color: #10b981;"></i> 3. Proposed Solution</h2>
+        <p class="about-text">
+          AuthentiCheck systematically addresses these vulnerabilities by introducing an entirely automated evaluation pipeline. Utilizing AI-oriented analysis and deterministic validation algorithms, the platform evaluates incoming documents in seconds rather than days. It issues a real-time confidence score and classification, empowering institutions to make immediate, secure, data-backed decisions.
+        </p>
+      </section>
+
+      <!-- 4. Key Features -->
+      <section class="about-section">
+        <h2><i class="fas fa-star"></i> 4. Key Features</h2>
+        <ul class="feature-list">
+          <li><i class="fas fa-check"></i> <strong>Document Upload & Verification:</strong> Secure intake of multiple file formats directly through the platform.</li>
+          <li><i class="fas fa-check"></i> <strong>Plagiarism Detection:</strong> Matches text logic structurally against proprietary metrics.</li>
+          <li><i class="fas fa-check"></i> <strong>Metadata Validation:</strong> Examines file footprints for unseen digital tampering or software-edited timelines.</li>
+          <li><i class="fas fa-check"></i> <strong>Paraphrasing Detection:</strong> Uses semantic analysis constraints to catch disguised and spun text.</li>
+          <li><i class="fas fa-check"></i> <strong>Authorship Analysis:</strong> Stylometric, stylistic evaluation predicting actual authorship structure.</li>
+          <li><i class="fas fa-check"></i> <strong>Report Generation:</strong> Detailed, printable, modular breakdown of where the document succeeded or flagged.</li>
+          <li><i class="fas fa-check"></i> <strong>History Tracking:</strong> Persistently logs past checks mapped directly to authorized user accounts.</li>
+        </ul>
+      </section>
+
+      <!-- 5. System Workflow -->
+      <section class="about-section" style="border-left-color: #f59e0b;">
+        <h2><i class="fas fa-project-diagram" style="color: #f59e0b;"></i> 5. System Workflow</h2>
+        <ul class="workflow-list">
+          <li><i class="fas fa-chevron-circle-right"></i> <strong>Step 1: User Login</strong> - Secure session access ensuring privacy (Email or Google OAuth).</li>
+          <li><i class="fas fa-chevron-circle-right"></i> <strong>Step 2: Upload Document</strong> - User easily submits the target file via the front-end dropzone.</li>
+          <li><i class="fas fa-chevron-circle-right"></i> <strong>Step 3: AI Processing</strong> - The backend captures metadata, hashes the file constraints, and calculates evaluation modules strictly.</li>
+          <li><i class="fas fa-chevron-circle-right"></i> <strong>Step 4: Result Generation</strong> - Generates dynamic validation values mapping to specific thresholds (Original, Suspicious, Fake).</li>
+          <li><i class="fas fa-chevron-circle-right"></i> <strong>Step 5: Report Storage</strong> - Full reporting history directly stored inside SQLite to be reviewed retroactively anytime.</li>
+        </ul>
+      </section>
+
+      <!-- 6. Technology Stack -->
+      <section class="about-section" style="border-left-color: #6366f1;">
+        <h2><i class="fas fa-layer-group" style="color: #6366f1;"></i> 6. Technology Stack</h2>
+        <div class="tech-card-container">
+          <div class="tech-card">
+            <i class="fab fa-html5" style="color: #e34f26;"></i>
+            <h3>Frontend</h3>
+            <p>HTML5, CSS3, Vanilla JS</p>
+          </div>
+          <div class="tech-card">
+            <i class="fab fa-python" style="color: #3776ab;"></i>
+            <h3>Backend</h3>
+            <p>Flask (Python SDK), Jinja2</p>
+          </div>
+          <div class="tech-card">
+            <i class="fas fa-database" style="color: #475569;"></i>
+            <h3>Database</h3>
+            <p>SQLite with SQLAlchemy</p>
+          </div>
+          <div class="tech-card">
+            <i class="fas fa-brain" style="color: #8b5cf6;"></i>
+            <h3>AI/NLP</h3>
+            <p>Deterministic Pattern & Hash Modeling</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Advantages -->
+      <section class="about-section" style="border-left-color: #8b5cf6;">
+        <h2><i class="fas fa-thumbs-up" style="color: #8b5cf6;"></i> 7. Advantages</h2>
+        <ul class="advantage-list">
+          <li><i class="fas fa-bolt"></i> <strong>Fast Processing:</strong> Immediate turnaround time compared to manual human read-throughs.</li>
+          <li><i class="fas fa-robot"></i> <strong>Automated Verification:</strong> Removes bias and applies consistent, mathematical standardization to all files.</li>
+          <li><i class="fas fa-shield-alt"></i> <strong>Secure & Scalable:</strong> Local session handling, preventing unauthorized document breaches over third-party channels.</li>
+          <li><i class="fas fa-user-friends"></i> <strong>User-Friendly Interface:</strong> Clean, dynamic application built for both non-technical supervisors and deep-dive technical engineers.</li>
+        </ul>
+      </section>
+
+      <!-- 8. Future Enhancements -->
+      <section class="about-section" style="border-left-color: #ec4899;">
+        <h2><i class="fas fa-rocket" style="color: #ec4899;"></i> 8. Future Enhancements</h2>
+        <ul class="future-list">
+          <li><i class="fas fa-cloud"></i> <strong>Cloud Deployment:</strong> Transitioning data storage architecture to a distributed PaaS network.</li>
+          <li><i class="fas fa-dna"></i> <strong>Advanced ML Models:</strong> Hooking deep learning, generative transformer API agents directly into the NLP assessment pipeline.</li>
+          <li><i class="fas fa-users"></i> <strong>Real-Time Collaboration:</strong> Enabling multi-user workspaces and organizational history sharing for compliance teams.</li>
+          <li><i class="fas fa-plug"></i> <strong>API Integration:</strong> Building programmable JSON REST API interfaces to allow B2B software to verify directly through us.</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p><i class="fas fa-copyright"></i> 2026 AuthentiCheck. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ JS -->
+  <script src="/js/script.js"></script>
+</body>
+</html>
