@@ -315,21 +315,12 @@ This project is provided as-is for educational and professional use.
 
 AuthentiCheck is developed by a dedicated team of professionals:
 
-- **Dr. Rajesh Kumar** - Project Lead, Cryptography Expert
-- **Priya Sharma** - Lead Developer, Full Stack Engineer
-- **Aditya Patel** - Machine Learning Specialist
-- **Neha Gupta** - UI/UX Designer
-- **Vikram Singh** - Security & Compliance Officer
-- **Ananya Nair** - Quality Assurance Lead
-
----
-
-## 📞 Contact & Support
-
-For questions, feedback, or support:
-- **Email**: team@authenticcheck.com
-- **Phone**: +1 (555) 123-4567
-- **Office**: 123 Tech Street, Innovation City, IC 12345
+- **Project Lead** - Cryptography Expert
+- **Lead Developer** - Full Stack Engineer
+- **Machine Learning Specialist**
+- **UI/UX Designer**
+- **Security & Compliance Officer**
+- **Quality Assurance Lead**
 
 ---
 
