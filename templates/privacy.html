@@ -20,7 +20,7 @@
     </ul>
     <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
       {% if session.user %}
-        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li style="font-weight: 500; color: #1e3a8a;"><i class="fas fa-user-circle"></i> {{ session.user.name }}</li>
         <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
       {% else %}
         <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>

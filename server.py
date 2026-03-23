@@ -279,6 +279,14 @@ def preview(doc_id):
     
     return render_template('preview.html', report=report_dict, doc_id=doc_id)
 
+
+@app.route('/result/<int:doc_id>')
+def result(doc_id):
+    if not is_logged_in(): return redirect('/login')
+    doc = get_db_connection().execute("SELECT * FROM reports WHERE id=?", (doc_id,)).fetchone()
+    if not doc: return "Not found", 404
+    return render_template('result.html', doc=doc)
+
 @app.route('/report/<int:id>')
 def report(id):
     if not is_logged_in():

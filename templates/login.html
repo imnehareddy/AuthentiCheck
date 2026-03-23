@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- ✅ CSS -->
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
   <!-- Google login -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -32,7 +32,7 @@
     </ul>
     <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
       {% if session.user %}
-        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li style="font-weight: 500; color: #1e3a8a;"><i class="fas fa-user-circle"></i> {{ session.user.name }}</li>
         <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
       {% else %}
         <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
@@ -73,9 +73,42 @@
       </p>
 
     
+      
+      
+      
       <hr style="margin: 20px 0;">
-      <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-login_uri="/google-login" data-auto_prompt="false"></div>
-      <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-shape="rectangular"></div>
+      <!-- Google Sign In -->
+      <div id="g_id_onload" 
+           data-client_id="674327002143-nhkch5dqp5g9cvbgu6rgtsmpattg83vp.apps.googleusercontent.com"
+           data-context="use"
+           data-ux_mode="popup"
+           data-callback="handleCredentialResponse"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin" 
+           data-type="standard" 
+           data-shape="rectangular" 
+           data-theme="outline" 
+           data-text="continue_with"
+           data-size="large" 
+           data-logo_alignment="left"
+           style="display: flex; justify-content: center; margin-top: 15px;">
+      </div>
+
+      <script>
+        function handleCredentialResponse(response) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/google-login';
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'credential';
+          input.value = response.credential;
+          form.appendChild(input);
+          document.body.appendChild(form);
+          form.submit();
+        }
+      </script>
 </form>
 
   </div>
@@ -87,7 +120,7 @@
 </footer>
 
 <!-- JS -->
-<script src="/js/script.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>

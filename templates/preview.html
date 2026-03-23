@@ -5,7 +5,7 @@
   <title>Results Preview</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <style>
     .module-list {
         list-style: none; padding: 0; max-width: 500px; margin: 0 auto;
@@ -35,7 +35,7 @@
     </ul>
     <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
       {% if session.user %}
-        <li style="font-weight: 500; color: #1e3a8a;">👤 {{ session.user.name }}</li>
+        <li style="font-weight: 500; color: #1e3a8a;"><i class="fas fa-user-circle"></i> {{ session.user.name }}</li>
         <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
       {% else %}
         <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
@@ -79,6 +79,6 @@
     </div>
   </main>
   
-  <script src="/js/script.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
