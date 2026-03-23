@@ -2,571 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verification Report - AuthentiCheck</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Verification Report</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
   <style>
-    .report-header {
-      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-      color: white;
-      padding: 2.5rem;
-      border-radius: 12px;
-      margin-bottom: 2.5rem;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .report-header h2 {
-      color: white;
-      border: none;
-      padding: 0;
-      margin: 0;
-      font-size: 1.6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-    }
-
-    .report-header h2 i {
-      font-size: 1.8rem;
-    }
-
-    .report-timestamp {
-      font-size: 1rem;
-      opacity: 0.95;
-      margin-top: 0.8rem;
-      font-weight: 500;
-    }
-
-    .report-timestamp i {
-      margin-right: 0.5rem;
-      color: #60a5fa;
-    }
-
-    .report-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 2.5rem 0;
-      border: 1px solid rgba(59, 130, 246, 0.1);
-    }
-
-    .report-table thead {
-      background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-      color: white;
-    }
-
-    .report-table th {
-      padding: 1.3rem;
-      text-align: left;
-      font-weight: 600;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .report-table th i {
-      font-size: 1.1rem;
-    }
-
-    .report-table td {
-      padding: 1.1rem 1.3rem;
-      border-bottom: 1px solid #e5e7eb;
-      color: #4b5563;
-    }
-
-    .report-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .report-table tbody tr:hover {
-      background: linear-gradient(90deg, rgba(59, 130, 246, 0.02) 0%, rgba(59, 130, 246, 0.04) 100%);
-      transition: background-color 0.2s ease;
-    }
-
-    .label-cell {
-      font-weight: 600;
-      color: #1e3a8a;
-      width: 35%;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .label-cell i {
-      color: #3b82f6;
-      font-size: 1rem;
-    }
-
-    .value-cell {
-      color: #4b5563;
-    }
-
-    .percentage-bar {
-      background: #e5e7eb;
-      border-radius: 6px;
-      height: 26px;
-      overflow: hidden;
-      position: relative;
-      margin: 0.5rem 0;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .percentage-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      font-size: 0.85rem;
-      transition: width 0.5s ease;
-    }
-
-    .classification-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-align: center;
-    }
-
-    .classification-original {
-      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-      color: #065f46;
-      border: 2px solid #10b981;
-    }
-
-    .classification-suspicious {
-      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-      color: #7f1d1d;
-      border: 2px solid #ef4444;
-    }
-
-    .details-section {
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      margin: 2.5rem 0;
-      border-left: 5px solid #3b82f6;
-      transition: all 0.3s ease;
-    }
-
-    .details-section:hover {
-      box-shadow: 0 12px 32px rgba(59, 130, 246, 0.12);
-    }
-
-    .details-section h3 {
-      color: #1e3a8a;
-      margin-bottom: 1.2rem;
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .details-section h3 i {
-      color: #3b82f6;
-    }
-
-    .detail-list {
-      list-style: none;
-    }
-
-    .detail-list li {
-      padding: 0.9rem 0;
-      padding-left: 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
-      color: #4b5563;
-      line-height: 1.7;
-      position: relative;
-    }
-
-    .detail-list li:before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #3b82f6;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    .detail-list li:last-child {
-      border-bottom: none;
-    }
-
-    .score-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.4rem 1rem;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-left: 0.5rem;
-    }
-
-    .score-high {
-      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-      color: #065f46;
-      border: 1px solid #10b981;
-    }
-
-    .score-medium {
-      background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 100%);
-      color: #92400e;
-      border: 1px solid #f59e0b;
-    }
-
-    .score-low {
-      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-      color: #7f1d1d;
-      border: 1px solid #ef4444;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 1.2rem;
-      margin-top: 2.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .action-buttons .btn {
-      flex: 1;
-      min-width: 180px;
-    }
-
-    @media (max-width: 768px) {
-      .report-table {
-        font-size: 0.9rem;
-      }
-
-      .report-table th,
-      .report-table td {
-        padding: 0.9rem;
-      }
-
-      .label-cell {
-        width: 45%;
-        font-size: 0.95rem;
-      }
-
-      .percentage-bar {
-        height: 22px;
-      }
-
-      .report-header {
-        padding: 1.5rem;
-      }
-
-      .report-header h2 {
-        font-size: 1.3rem;
-      }
-
-      .action-buttons {
-        flex-direction: column;
-      }
-
-      .action-buttons .btn {
-        width: 100%;
-      }
-
-      .details-section {
-        padding: 1.5rem;
-      }
-    }
+    .container { padding: 2rem; }
+    .report-box { background: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    h1, h2 { color: #1e3a8a; }
+    .row { margin: 10px 0; }
+    .label { font-weight: bold; }
+    .bar { height: 20px; background: #e5e7eb; border-radius: 5px; overflow: hidden; }
+    .fill { height: 100%; background: #3b82f6; text-align: center; color: white; font-size: 12px; }
+    .status { padding: 8px 12px; border-radius: 6px; font-weight: bold; }
+    .green { background: #d1fae5; color: #065f46; }
+    .yellow { background: #fef3c7; color: #92400e; }
+    .red { background: #fee2e2; color: #7f1d1d; }
   </style>
 </head>
+
 <body>
-  <!-- Navigation Bar -->
-  
-  <nav style="display: flex; justify-content: space-between; align-items: center; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 2rem;">
-    <ul class="nav-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
-      <li class="logo" style="font-weight: bold; font-size: 1.2rem; color: #1e3a8a;"><i class="fas fa-certificate"></i> AuthentiCheck</li>
-      <li><a href="/" style="text-decoration: none; color: #4b5563;"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="/upload" style="text-decoration: none; color: #4b5563;"><i class="fas fa-upload"></i> Upload</a></li>
-      <li><a href="/history" style="text-decoration: none; color: #4b5563;"><i class="fas fa-history"></i> History</a></li>
-      <li><a href="/about" style="text-decoration: none; color: #4b5563;"><i class="fas fa-info-circle"></i> About</a></li>
-    </ul>
-    <ul class="auth-links" style="display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0;">
-      {% if session.user %}
-        <li style="font-weight: 500; color: #1e3a8a;"><i class="fas fa-user-circle"></i> {{ session.user.name }}</li>
-        <li><a href="/logout" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border-radius: 6px; text-decoration: none;">Logout</a></li>
-      {% else %}
-        <li><a href="/login" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none;">Login</a></li>
-      {% endif %}
-    </ul>
-  </nav>
 
-  <!-- Main Content -->
-  <main>
-    <div class="container">
-      <h1><i class="fas fa-file-pdf"></i> Document Verification Report</h1>
+<div class="container">
+  <div class="report-box">
 
-      <!-- Report Header -->
-      <div class="report-header">
-        <h2><i class="fas fa-chart-line"></i> Analysis Results</h2>
-        <p class="report-timestamp"><i class="fas fa-clock"></i> Generated: <span id="reportDate"></span></p>
-      </div>
+    <h1>📄 Document Verification Report</h1>
 
-      <!-- Document Information Section -->
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th colspan="2" style="font-size: 1.1rem;"><i class="fas fa-file-alt"></i> Document Information</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="label-cell"><i class="fas fa-file-name"></i> Document Name</td>
-            <td class="value-cell" id="docName">{{ report.filename }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-folder-open"></i> Document Type</td>
-            <td class="value-cell" id="docType">{{ report.mime_type }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-calendar-alt"></i> Upload Date & Time</td>
-            <td class="value-cell" id="uploadTime">{{ report.upload_time }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-weight"></i> File Size</td>
-            <td class="value-cell" id="fileSize">{{ report.file_size }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-fingerprint"></i> Document Hash</td>
-            <td class="value-cell" id="docHash" style="font-family: monospace; font-size: 0.9rem;">{{ report.doc_hash }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Document Info -->
+    <h2>Document Information</h2>
 
-      <!-- Plagiarism Detection Section -->
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th colspan="2" style="font-size: 1.1rem;"><i class="fas fa-copy"></i> Plagiarism Detection Report</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="label-cell"><i class="fas fa-percent"></i> Plagiarism Score</td>
-            <td class="value-cell">
-              <div class="percentage-bar">
-                <div class="percentage-fill" style="width: {{ report.modules['Plagiarism Detection'].score|int }}%;">{{ report.modules['Plagiarism Detection'].score|int }}%</div>
-              </div>
-              <span class="score-indicator {% if report.modules['Plagiarism Detection'].score >= 70 %}score-high{% elif report.modules['Plagiarism Detection'].score >= 50 %}score-medium{% else %}score-low{% endif %}"><i class="fas fa-check"></i> {{ report.modules['Plagiarism Detection'].status }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-database"></i> Matched Sources</td>
-            <td class="value-cell" id="plagiarismSources">{{ report.modules['Plagiarism Detection'].status }}</td>
-          </tr>
-          
-          <tr>
-            <td class="label-cell"><i class="fas fa-flag"></i> Plagiarism Status</td>
-            <td class="value-cell">
-              <span class="classification-badge {% if report.final_score >= 70 %}classification-original{% else %}classification-suspicious{% endif %}">
-                <i class="fas fa-check-circle"></i> {{ report.final_status|upper }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row"><span class="label">File Name:</span> {{ doc['filename'] }}</div>
+    <div class="row"><span class="label">Type:</span> {{ doc['mime'] }}</div>
+    <div class="row"><span class="label">Upload Time:</span> {{ doc['upload_time'] }}</div>
+    <div class="row"><span class="label">File Size:</span> {{ doc['file_size'] }} bytes</div>
+    <div class="row"><span class="label">Hash:</span> {{ doc['file_hash'] }}</div>
 
-      <!-- Paraphrasing Detection Section -->
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th colspan="2" style="font-size: 1.1rem;"><i class="fas fa-pen-fancy"></i> Paraphrasing Detection Report</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="label-cell"><i class="fas fa-percent"></i> Paraphrasing Score</td>
-            <td class="value-cell">
-              <div class="percentage-bar">
-                <div class="percentage-fill" style="width: {{ report.modules['Paraphrasing Detection'].score|int }}%;">{{ report.modules['Paraphrasing Detection'].score|int }}%</div>
-              </div>
-              <span class="score-indicator {% if report.modules['Paraphrasing Detection'].score >= 70 %}score-high{% elif report.modules['Paraphrasing Detection'].score >= 50 %}score-medium{% else %}score-low{% endif %}"><i class="fas fa-check"></i> {{ report.modules['Paraphrasing Detection'].status }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-search"></i> Similar Phrases Detected</td>
-            <td class="value-cell" id="similarPhrases">{{ report.modules['Paraphrasing Detection'].status }}</td>
-          </tr>
-          
-          <tr>
-            <td class="label-cell"><i class="fas fa-lightbulb"></i> Rewriting Patterns</td>
-            <td class="value-cell" id="rewritingPatterns">
-              <span class="score-indicator {% if report.modules['Paraphrasing Detection'].score >= 70 %}score-high{% else %}score-low{% endif %}"><i class="fas fa-check"></i> {{ report.modules['Paraphrasing Detection'].status }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Scores -->
+    <h2>Analysis Scores</h2>
 
-      <!-- Tampering Detection Section -->
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th colspan="2" style="font-size: 1.1rem;"><i class="fas fa-exclamation-triangle"></i> Tampering & Forgery Detection Report</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="label-cell"><i class="fas fa-shield-alt"></i> Document Integrity</td>
-            <td class="value-cell">
-              <span class="classification-badge {% if report.modules['Metadata Verification'].score >= 70 %}classification-original{% else %}classification-suspicious{% endif %}">
-                <i class="fas fa-check-circle"></i> {{ report.modules['Metadata Verification'].status|upper }}
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-database"></i> Metadata Consistency</td>
-            <td class="value-cell" id="metadataConsistency">{{ report.modules['Metadata Verification'].status }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-eye"></i> Forgery Detection</td>
-            <td class="value-cell" id="forgeryDetection">{{ report.modules['Metadata Verification'].status }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-pen"></i> Content Modification</td>
-            <td class="value-cell" id="contentModification">{{ report.modules['Metadata Verification'].status }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-fingerprint"></i> Document Fingerprint Match</td>
-            <td class="value-cell" id="fingerprintMatch">{{ report.modules['Similarity Detection'].status }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Authorship Analysis Section -->
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th colspan="2" style="font-size: 1.1rem;"><i class="fas fa-user-check"></i> Authorship Analysis Report</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="label-cell"><i class="fas fa-user"></i> Author Identification</td>
-            <td class="value-cell" id="authorId">{{ report.modules['Authorship Analysis'].status }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-fingerprint"></i> Writing Style Consistency</td>
-            <td class="value-cell" id="writingConsistency">{{ report.modules['Authorship Analysis'].status }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-brain"></i> Linguistic Pattern Analysis</td>
-            <td class="value-cell" id="linguisticPattern">{{ report.modules['Authorship Analysis'].status }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-stream"></i> Vocabulary Profile</td>
-            <td class="value-cell" id="vocabProfile">{{ report.modules['Authorship Analysis'].status }}</td>
-          </tr>
-          <tr>
-            <td class="label-cell"><i class="fas fa-balance-scale"></i> Authorship Confidence</td>
-            <td class="value-cell" id="authorshipConfidence">{{ report.modules['Authorship Analysis'].score }}% Confidence</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Final Classification Section -->
-      <div class="details-section">
-        <h3><i class="fas fa-award"></i> Final Classification</h3>
-        <table style="width: 100%; border: none;">
-          <tr>
-            <td style="border: none; padding: 1rem 0;">
-              <strong><i class="fas fa-flag-checkered"></i> Overall Classification:</strong>
-            </td>
-            <td style="border: none; padding: 1rem 0; text-align: right;">
-              <span class="classification-badge {% if report.final_score >= 70 %}classification-original{% else %}classification-suspicious{% endif %}">
-                <i class="fas fa-check-circle"></i> {{ report.final_status|upper }}
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td style="border: none; padding: 0.5rem 0;">
-              <strong><i class="fas fa-poll"></i> Confidence Level:</strong>
-            </td>
-            <td style="border: none; padding: 0.5rem 0; text-align: right;">
-              <div class="percentage-bar" style="max-width: 200px; margin-left: auto;">
-                <div class="percentage-fill" style="width: {{ report.final_score|int }}%;">{{ report.final_score }}%</div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-
-
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <button class="btn btn-primary" onclick="printReport()"><i class="fas fa-print"></i> Print Report</button>
-        <button class="btn btn-primary" onclick="downloadReport()"><i class="fas fa-download"></i> Download Report</button>
-        <button class="btn btn-secondary" onclick="goBackToUpload()"><i class="fas fa-plus-circle"></i> Verify Another</button>
-      </div>
+    <div class="row">
+      Metadata:
+      <div class="bar"><div class="fill" style="width: {{ doc['metadata_score']|int }}%">{{ doc['metadata_score']|int }}%</div></div>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer>
-    <p><i class="fas fa-copyright"></i> 2026 AuthentiCheck. All rights reserved.</p>
-    <p><i class="fas fa-lock-open"></i> Secure Document Verification Platform</p>
-    <div class="footer-links">
-      <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
-      <a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a>
-      <a href="#"><i class="fas fa-envelope"></i> Contact Us</a>
+    <div class="row">
+      Similarity:
+      <div class="bar"><div class="fill" style="width: {{ doc['similarity_score']|int }}%">{{ doc['similarity_score']|int }}%</div></div>
     </div>
-  </footer>
 
-  <script>
-    // Set date on report generation
-    document.addEventListener('DOMContentLoaded', function() {
-      const now = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-      document.getElementById('reportDate').textContent = now.toLocaleDateString('en-US', options);
-    });
+    <div class="row">
+      Plagiarism:
+      <div class="bar"><div class="fill" style="width: {{ doc['plagiarism_score']|int }}%">{{ doc['plagiarism_score']|int }}%</div></div>
+    </div>
 
-    // Print report
-    function printReport() {
-      window.print();
-    }
+    <div class="row">
+      Paraphrasing:
+      <div class="bar"><div class="fill" style="width: {{ doc['paraphrasing_score']|int }}%">{{ doc['paraphrasing_score']|int }}%</div></div>
+    </div>
 
-    // Download report as text
-    function downloadReport() {
-      const reportContent = generateReportContent();
-      const blob = new Blob([reportContent], { type: 'text/plain' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `AuthentiCheck_Report_${Date.now()}.txt`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    }
+    <div class="row">
+      Authorship:
+      <div class="bar"><div class="fill" style="width: {{ doc['authorship_score']|int }}%">{{ doc['authorship_score']|int }}%</div></div>
+    </div>
 
+    <!-- Final -->
+    <h2>Final Result</h2>
 
-    // Go back to upload
-    function goBackToUpload() {
-      window.location.href = '/upload';
-    }
-  </script>
+    <div class="row">
+      <span class="label">Score:</span> {{ doc['final_score']|round(2) }}%
+    </div>
 
-  
+    <div class="row">
+      <span class="label">Status:</span>
+      <span class="status
+        {% if doc['final_score'] >= 75 %}green
+        {% elif doc['final_score'] >= 50 %}yellow
+        {% else %}red{% endif %}">
+        {{ doc['final_status'] }}
+      </span>
+    </div>
+
+    <br>
+
+    <a href="/upload">🔁 Verify Another</a>
+
+  </div>
+</div>
+
 </body>
 </html>

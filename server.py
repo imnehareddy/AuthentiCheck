@@ -220,17 +220,23 @@ def upload():
 # ================= PREVIEW =================
 @app.route('/preview/<int:doc_id>')
 def preview(doc_id):
-    if not is_logged_in():
-        return redirect('/login')
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
 
-    conn = get_db_connection()
-    doc = conn.execute('SELECT * FROM documents WHERE id=?', (doc_id,)).fetchone()
-    conn.close()
+        cur.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
+        doc = cur.fetchone()
 
-    if not doc:
-        return redirect('/upload')
+        conn.close()
 
-    return render_template('preview.html', doc=doc)
+        if not doc:
+            return "Document not found", 404
+
+        return render_template("report.html", doc=doc)
+
+    except Exception as e:
+        import traceback
+        return "<pre>" + traceback.format_exc() + "</pre>"
 
 # ================= REPORT =================
 @app.route('/report/<int:doc_id>')
