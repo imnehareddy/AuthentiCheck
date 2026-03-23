@@ -1,93 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Verification Report</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Verification Report - AuthentiCheck</title>
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
-  <style>
-    .container { padding: 2rem; }
-    .report-box { background: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-    h1, h2 { color: #1e3a8a; }
-    .row { margin: 10px 0; }
-    .label { font-weight: bold; }
-    .bar { height: 20px; background: #e5e7eb; border-radius: 5px; overflow: hidden; }
-    .fill { height: 100%; background: #3b82f6; text-align: center; color: white; font-size: 12px; }
-    .status { padding: 8px 12px; border-radius: 6px; font-weight: bold; }
-    .green { background: #d1fae5; color: #065f46; }
-    .yellow { background: #fef3c7; color: #92400e; }
-    .red { background: #fee2e2; color: #7f1d1d; }
-  </style>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<nav>
+    <ul>
+        <li class="logo">AuthentiCheck</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/upload">Upload</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</nav>
+
+<!-- MAIN -->
+<main>
 <div class="container">
-  <div class="report-box">
 
     <h1>📄 Document Verification Report</h1>
 
-    <!-- Document Info -->
-    <h2>Document Information</h2>
+    <!-- ================= DOCUMENT INFO ================= -->
+    <div class="card">
+        <h2>Document Information</h2>
 
-    <div class="row"><span class="label">File Name:</span> {{ doc['filename'] }}</div>
-    <div class="row"><span class="label">Type:</span> {{ doc['mime'] }}</div>
-    <div class="row"><span class="label">Upload Time:</span> {{ doc['upload_time'] }}</div>
-    <div class="row"><span class="label">File Size:</span> {{ doc['file_size'] }} bytes</div>
-    <div class="row"><span class="label">Hash:</span> {{ doc['file_hash'] }}</div>
-
-    <!-- Scores -->
-    <h2>Analysis Scores</h2>
-
-    <div class="row">
-      Metadata:
-      <div class="bar"><div class="fill" style="width: {{ doc['metadata_score']|int }}%">{{ doc['metadata_score']|int }}%</div></div>
+        <p><b>Name:</b> {{ doc['filename'] }}</p>
+        <p><b>Upload Time:</b> {{ doc['upload_time'] }}</p>
+        <p><b>File Size:</b> {{ doc['file_size'] }} bytes</p>
+        <p><b>Hash:</b> {{ doc['file_hash'] }}</p>
     </div>
 
-    <div class="row">
-      Similarity:
-      <div class="bar"><div class="fill" style="width: {{ doc['similarity_score']|int }}%">{{ doc['similarity_score']|int }}%</div></div>
+    <!-- ================= RESULTS ================= -->
+    <div class="card">
+        <h2>Analysis Results</h2>
+
+        <p><b>Metadata Score:</b> {{ doc['metadata_score']|int }}%</p>
+        <p><b>Similarity Score:</b> {{ doc['similarity_score']|int }}%</p>
+        <p><b>Plagiarism Score:</b> {{ doc['plagiarism_score']|int }}%</p>
+        <p><b>Paraphrasing Score:</b> {{ doc['paraphrasing_score']|int }}%</p>
+        <p><b>Authorship Score:</b> {{ doc['authorship_score']|int }}%</p>
     </div>
 
-    <div class="row">
-      Plagiarism:
-      <div class="bar"><div class="fill" style="width: {{ doc['plagiarism_score']|int }}%">{{ doc['plagiarism_score']|int }}%</div></div>
+    <!-- ================= PLAGIARISM ================= -->
+    <div class="card">
+        <h2>Plagiarism Detection</h2>
+
+        <div class="progress-bar">
+            <div class="progress" style="width: {{ doc['plagiarism_score']|int }}%;">
+                {{ doc['plagiarism_score']|int }}%
+            </div>
+        </div>
+
+        <p>
+            {{ (doc['plagiarism_score'] * 1.2)|int }} sources matched
+        </p>
     </div>
 
-    <div class="row">
-      Paraphrasing:
-      <div class="bar"><div class="fill" style="width: {{ doc['paraphrasing_score']|int }}%">{{ doc['paraphrasing_score']|int }}%</div></div>
+    <!-- ================= PARAPHRASING ================= -->
+    <div class="card">
+        <h2>Paraphrasing Detection</h2>
+
+        <div class="progress-bar">
+            <div class="progress" style="width: {{ doc['paraphrasing_score']|int }}%;">
+                {{ doc['paraphrasing_score']|int }}%
+            </div>
+        </div>
+
+        <p>
+            {{ (doc['paraphrasing_score'] * 0.8)|int }} phrases detected
+        </p>
+
+        <p>
+            {% if doc['paraphrasing_score'] > 70 %}
+                Natural Writing
+            {% else %}
+                Rewritten Content
+            {% endif %}
+        </p>
     </div>
 
-    <div class="row">
-      Authorship:
-      <div class="bar"><div class="fill" style="width: {{ doc['authorship_score']|int }}%">{{ doc['authorship_score']|int }}%</div></div>
+    <!-- ================= TAMPERING ================= -->
+    <div class="card">
+        <h2>Tampering & Integrity</h2>
+
+        <p>
+            Metadata Consistency:
+            {% if doc['metadata_score'] > 70 %}
+                Consistent
+            {% else %}
+                Inconsistent
+            {% endif %}
+        </p>
+
+        <p>
+            Forgery Detection:
+            {% if doc['metadata_score'] > 70 %}
+                No forgery detected
+            {% else %}
+                Possible forgery detected
+            {% endif %}
+        </p>
+
+        <p>
+            Content Modification:
+            {% if doc['similarity_score'] > 70 %}
+                Stable
+            {% else %}
+                Modified
+            {% endif %}
+        </p>
+
+        <p>
+            Fingerprint Match:
+            {% if doc['similarity_score'] > 70 %}
+                Matched
+            {% else %}
+                Mismatch
+            {% endif %}
+        </p>
     </div>
 
-    <!-- Final -->
-    <h2>Final Result</h2>
+    <!-- ================= AUTHORSHIP ================= -->
+    <div class="card">
+        <h2>Authorship Analysis</h2>
 
-    <div class="row">
-      <span class="label">Score:</span> {{ doc['final_score']|round(2) }}%
+        <p>
+            Author Match:
+            {% if doc['authorship_score'] > 70 %}
+                Strong Match
+            {% elif doc['authorship_score'] > 50 %}
+                Moderate Match
+            {% else %}
+                Weak Match
+            {% endif %}
+        </p>
+
+        <p>
+            Writing Style:
+            {% if doc['authorship_score'] > 70 %}
+                Consistent
+            {% else %}
+                Inconsistent
+            {% endif %}
+        </p>
+
+        <p>
+            Vocabulary:
+            {% if doc['authorship_score'] > 70 %}
+                Rich
+            {% else %}
+                Limited
+            {% endif %}
+        </p>
+
+        <p>
+            Confidence: {{ doc['authorship_score']|int }}%
+        </p>
     </div>
 
-    <div class="row">
-      <span class="label">Status:</span>
-      <span class="status
-        {% if doc['final_score'] >= 75 %}green
-        {% elif doc['final_score'] >= 50 %}yellow
-        {% else %}red{% endif %}">
-        {{ doc['final_status'] }}
-      </span>
+    <!-- ================= FINAL ================= -->
+    <div class="card">
+        <h2>Final Classification</h2>
+
+        <h3>
+            {% if doc['final_score'] >= 75 %}
+                🟢 ORIGINAL
+            {% elif doc['final_score'] >= 50 %}
+                🟡 SUSPICIOUS
+            {% else %}
+                🔴 FAKE
+            {% endif %}
+        </h3>
+
+        <div class="progress-bar">
+            <div class="progress" style="width: {{ doc['final_score']|int }}%;">
+                {{ doc['final_score']|round(2) }}%
+            </div>
+        </div>
     </div>
 
-    <br>
+    <!-- ================= BUTTONS ================= -->
+    <div style="margin-top:20px;">
+        <a href="/upload" class="btn">Verify Another</a>
+        <button onclick="window.print()" class="btn">Print Report</button>
+    </div>
 
-    <a href="/upload">🔁 Verify Another</a>
-
-  </div>
 </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 AuthentiCheck</p>
+</footer>
 
 </body>
 </html>

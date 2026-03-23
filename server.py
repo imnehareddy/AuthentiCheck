@@ -3,7 +3,8 @@ import sqlite3
 import hashlib
 import random
 from datetime import datetime
-
+from google.oauth2 import id_token
+from google.auth.transport import requests as grequests
 from flask import Flask, request, render_template, redirect, session, send_from_directory, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -142,6 +143,33 @@ def register():
 def logout():
     session.clear()
     return redirect('/')
+
+@app.route('/google-login', methods=['POST'])
+def google_login():
+    try:
+        token = request.json.get('credential')
+
+        # Verify token
+        idinfo = id_token.verify_oauth2_token(
+            token,
+            grequests.Request(),
+            "674327002143-nhkch5dqp5g9cvbgu6rgtsmpattg83vp.apps.googleusercontent.com"
+        )
+
+        user_email = idinfo.get('email')
+        user_name = idinfo.get('name')
+
+        # Store in session
+        session['user'] = {
+            'email': user_email,
+            'name': user_name
+        }
+
+        return jsonify({"success": True})
+
+    except Exception as e:
+        print("Google login error:", e)
+        return jsonify({"success": False}), 400
 
 # ================= ROUTES =================
 @app.route('/')

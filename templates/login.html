@@ -82,7 +82,7 @@
            data-client_id="674327002143-nhkch5dqp5g9cvbgu6rgtsmpattg83vp.apps.googleusercontent.com"
            data-context="use"
            data-ux_mode="popup"
-           data-callback="handleCredentialResponse"
+           data-callback="handleGoogleLogin"
            data-auto_prompt="false">
       </div>
       <div class="g_id_signin" 
@@ -94,7 +94,23 @@
            data-logo_alignment="left"
            style="display: flex; justify-content: center; margin-top: 15px;">
       </div>
-
+<script>
+function handleGoogleLogin(response) {
+    fetch('/google-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential: response.credential })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = "/upload";
+        } else {
+            alert("Google login failed");
+        }
+    });
+}
+</script>
       <script>
         function handleCredentialResponse(response) {
           const form = document.createElement('form');
